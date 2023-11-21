@@ -18,6 +18,8 @@ public class TeacherDAO {
         }
     }
     public void createTeacher(Connection connection, CreateTeacher createTeacher) throws SQLException {
+        createTeacherTable(connection);
+
         String sql = "INSERT INTO teacher (name, email) VALUES (?, ?)";
 
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {

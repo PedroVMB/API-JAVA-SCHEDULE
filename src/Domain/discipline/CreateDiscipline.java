@@ -1,4 +1,6 @@
 package Domain.discipline;
 
-public record CreateDiscipline(String name) {
+public record CreateDiscipline(int id, String name) {
+    public void setId(int generatedId) {
+    }
 }
