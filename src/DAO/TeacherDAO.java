@@ -35,11 +35,13 @@ public class TeacherDAO {
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     int generatedId = generatedKeys.getInt(1);
-                    createTeacher.setId(generatedId);
+                    Teacher createdTeacher = new Teacher(generatedId, createTeacher.name(), createTeacher.email());
+                    // faça o que precisar com o objeto Teacher criado
                 } else {
                     throw new SQLException("Falha ao criar o professor, nenhum ID obtido.");
                 }
             }
+
         }
     }
 
@@ -118,4 +120,5 @@ public class TeacherDAO {
 
         return new Teacher(id, name, email);
     }
+
 }
