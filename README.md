@@ -8,7 +8,9 @@
     "name": "professor",
     "email": "professor@professor.com.br"
       }
+      
 [GET] http://localhost:3000/api/teachers -> Pega todos os professores
+
 [GET] http://localhost:3000/api/teachers/{id do professor aqui} -> Pega um professor por ID
 
 [PUT] http://localhost:3000/api/teachers/{id do professor aqui} -> Atualiza um professor por ID
@@ -24,7 +26,8 @@
     "name": "OOP",
       }
 
-[GET] http://localhost:3000/api/disciplines -> Pega todos as disciplinas
+[GET] http://localhost:3000/api/disciplines -> Pega todos as disciplinas 
+
 [GET] http://localhost:3000/api/disciplines/{id da disciplina aqui} -> Pega uma disciplina por ID
 
 [PUT] http://localhost:3000/api/disciplines/{id da disciplinaaqui} -> Atualiza uma disciplina por ID
@@ -46,6 +49,7 @@
       }
 
 [GET] http://localhost:3000/api/classrooms -> Pega todas as salas
+
 [GET] http://localhost:3000/api/classrooms/{id da sala aqui} -> Pega uma sala por ID
 
 [PUT] http://localhost:3000/api/classrooms/{id da sala aqui} -> Atualiza uma sala por ID
