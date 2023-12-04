@@ -5,7 +5,7 @@
 [POST] http://localhost:3000/api/teachers:
 <br />  
   Exemplo: 
-    
+  
       {
     "name": "professor",
     "email": "professor@professor.com.br"
@@ -35,6 +35,7 @@
       {
     "name": "OOP",
       }
+      
 <br />
 [GET] http://localhost:3000/api/disciplines -> Pega todos as disciplinas 
 <br />
@@ -55,16 +56,15 @@
 [POST] http://localhost:3000/api/classrooms: 
 <br />
   Exemplo: 
-  {
-
+      
+      {
         "daysOfWeek": "SEGUNDA",
         "shift": "MATUTINO",
         "schedule": "7 as 11",
         teacherId: 1,
         disciplineId: 2
       
-  }
-      
+      }   
 <br />
 [GET] http://localhost:3000/api/classrooms -> Pega todas as salas
 <br />
