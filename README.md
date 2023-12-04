@@ -37,6 +37,7 @@
       }
       
 <br />
+
 [GET] http://localhost:3000/api/disciplines -> Pega todos as disciplinas 
 <br />
 <br />
@@ -66,6 +67,7 @@
       
       }   
 <br />
+
 [GET] http://localhost:3000/api/classrooms -> Pega todas as salas
 <br />
 <br />
