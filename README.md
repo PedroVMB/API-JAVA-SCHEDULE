@@ -31,7 +31,7 @@
 [POST] http://localhost:3000/api/disciplines: 
 <br />
   Exemplo: 
-<br />
+
       {
     "name": "OOP",
       }
@@ -55,13 +55,16 @@
 [POST] http://localhost:3000/api/classrooms: 
 <br />
   Exemplo: 
-      {
+  {
+
         "daysOfWeek": "SEGUNDA",
         "shift": "MATUTINO",
         "schedule": "7 as 11",
         teacherId: 1,
         disciplineId: 2
-      }
+      
+  }
+      
 <br />
 [GET] http://localhost:3000/api/classrooms -> Pega todas as salas
 <br />
