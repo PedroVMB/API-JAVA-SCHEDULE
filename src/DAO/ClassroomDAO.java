@@ -64,7 +64,11 @@ public class ClassroomDAO {
 
     // Método para obter uma sala de aula pelo ID
     public Classroom getClassroomById(Connection connection, int classroomId) throws SQLException {
-        String sql = "SELECT * FROM classroom WHERE id = ?";
+        String sql = "SELECT classroom.*, teacher.name AS teacher_name, discipline.name AS discipline_name " +
+                "FROM classroom " +
+                "JOIN teacher ON classroom.teacher_id = teacher.id " +
+                "JOIN discipline ON classroom.discipline_id = discipline.id " +
+                "WHERE classroom.id = ?";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, classroomId);
@@ -81,7 +85,10 @@ public class ClassroomDAO {
 
     // Método para obter todas as salas de aula
     public List<Classroom> getAllClassrooms(Connection connection) throws SQLException {
-        String sql = "SELECT * FROM classroom";
+        String sql = "SELECT classroom.*, teacher.name AS teacher_name, discipline.name AS discipline_name " +
+                "FROM classroom " +
+                "JOIN teacher ON classroom.teacher_id = teacher.id " +
+                "JOIN discipline ON classroom.discipline_id = discipline.id";
 
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
@@ -96,6 +103,7 @@ public class ClassroomDAO {
             return classrooms;
         }
     }
+
 
     // Método para atualizar informações de uma sala de aula
     public void updateClassroom(Connection connection, int classroomId, CreateClassroom createClassroom) throws SQLException {
