@@ -2,40 +2,46 @@
 
 ###ENDPOINT PARA CRIAR UM PROFESSOR
 
-[POST] http://localhost:3000/api/teachers: 
+[POST] http://localhost:3000/api/teachers:
+<br />  
   Exemplo: 
+    
       {
     "name": "professor",
     "email": "professor@professor.com.br"
       }
-      
+<br />
+  
 [GET] http://localhost:3000/api/teachers -> Pega todos os professores
-
+<br />
 [GET] http://localhost:3000/api/teachers/{id do professor aqui} -> Pega um professor por ID
-
+<br />
 [PUT] http://localhost:3000/api/teachers/{id do professor aqui} -> Atualiza um professor por ID
-
+<br />
 [DELETE] http://localhost:3000/api/teachers/{id do professor aqui} -> Deleta um professor por ID
-
+<br />
 -----------------------------------------------------
-
+<br />
 ###ENDPOINT PARA CRIAR UMA DISCIPLINA 
+<br />
 [POST] http://localhost:3000/api/disciplines: 
+<br />
   Exemplo: 
+<br />
       {
     "name": "OOP",
       }
-
+<br />
 [GET] http://localhost:3000/api/disciplines -> Pega todos as disciplinas 
-
+<br />
 [GET] http://localhost:3000/api/disciplines/{id da disciplina aqui} -> Pega uma disciplina por ID
-
+<br />
 [PUT] http://localhost:3000/api/disciplines/{id da disciplinaaqui} -> Atualiza uma disciplina por ID
-
+<br />
 [DELETE] http://localhost:3000/api/disciplines/{id da disciplina aqui} -> Deleta uma disciplina por ID
-
+<br />
 -----------------------------------------------------
-
+<br />
 ###ENDPOINT PARA CRIAR UMA SALA 
 
 [POST] http://localhost:3000/api/classrooms: 
