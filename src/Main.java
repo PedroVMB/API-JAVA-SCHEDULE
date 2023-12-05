@@ -1,7 +1,5 @@
 import Controller.ClassroomController;
 import Controller.DisciplineController;
-import Controller.tests.MyHandler;
-import Controller.tests.SecondHandler;
 import Service.ClassroomService;
 import Service.DisciplineService;
 import com.sun.net.httpserver.HttpServer;
@@ -9,6 +7,8 @@ import java.net.InetSocketAddress;
 import java.io.IOException;
 import Controller.TeacherController;
 import Service.TeacherService;
+
+import com.sun.net.httpserver.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -24,11 +24,26 @@ public class Main {
         HttpServer server = HttpServer.create(new InetSocketAddress(3000), 0);
 
         server.createContext("/api/teachers", teacherController);
-
         server.createContext("/api/disciplines", disciplineController);
-
         server.createContext("/api/classrooms", classroomController);
 
+
+        server.createContext("/", exchange -> {
+            Headers headers = exchange.getResponseHeaders();
+            headers.set("Access-Control-Allow-Origin", "*");
+            headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+            headers.set("Access-Control-Allow-Headers", "Content-Type");
+            headers.set("Access-Control-Max-Age", "3600");
+
+
+            if (exchange.getRequestMethod().equalsIgnoreCase("OPTIONS")) {
+                exchange.sendResponseHeaders(204, -1);
+                return;
+            }
+
+
+            exchange.getHttpContext().getHandler().handle(exchange);
+        });
 
         server.setExecutor(null);
         server.start();
