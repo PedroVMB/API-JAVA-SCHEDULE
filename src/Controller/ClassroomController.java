@@ -24,11 +24,11 @@ public class ClassroomController implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        try{
+        try {
             String method = exchange.getRequestMethod();
             String path = exchange.getRequestURI().getPath();
 
-            switch (method){
+            switch (method) {
                 case "GET":
                     handleGetRequest(path, exchange);
                     break;
@@ -41,11 +41,12 @@ public class ClassroomController implements HttpHandler {
                 case "DELETE":
                     handleDeleteRequest(path, exchange);
                     break;
+                default:
+                    sendResponse(exchange, "Método não suportado", 405);
             }
-        }catch (SQLException e){
-            sendResponse(exchange, "Erro interno de servidor");
+        } catch (SQLException e) {
+            sendResponse(exchange,  e.toString(), 500);
         }
-
     }
 
     private void handleGetRequest(String path, HttpExchange exchange) throws IOException, SQLException{

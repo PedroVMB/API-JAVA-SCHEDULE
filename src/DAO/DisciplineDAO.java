@@ -12,7 +12,7 @@ public class DisciplineDAO {
     public static void createTableDiscipline(Connection connection) throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS discipline (" +
                 "id INT PRIMARY KEY AUTO_INCREMENT," +
-                "name VARCHAR(255) NOT NULL," +
+                "name VARCHAR(255) NOT NULL" +
                 ")";
         try (Statement statement = connection.createStatement()){
             statement.executeUpdate(sql);
@@ -37,7 +37,7 @@ public class DisciplineDAO {
             try(ResultSet generetadKeys = statement.getGeneratedKeys()){
                 if(generetadKeys.next()){
                     int generatedID = generetadKeys.getInt(1);
-                    createDiscipline.setId(generatedID);
+                    Discipline createdDiscipline = new Discipline(generatedID, createDiscipline.name());
                 }else {
                     throw new SQLException("Falha ao criar a disciplina, nenhum ID obtido");
                 }
@@ -83,15 +83,16 @@ public class DisciplineDAO {
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, createDiscipline.name());
-            statement.setInt(3, disciplineId);
+            statement.setInt(2, disciplineId);  // Corrigido para índice 2
 
             int affectedRows = statement.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new SQLException("Falha ao atualizar o professor, nenhuma disciplina encontrado com o ID: " + disciplineId);
+                throw new SQLException("Falha ao atualizar a disciplina, nenhuma disciplina encontrada com o ID: " + disciplineId);
             }
         }
     }
+
 
 
     public void deleteDiscipline(Connection connection, int disciplineId) throws SQLException {

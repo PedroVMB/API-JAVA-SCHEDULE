@@ -5,13 +5,10 @@ public class Discipline {
 
     private String name;
 
-    public Discipline(CreateDiscipline createDiscipline){
-        this.id = createDiscipline.id();
-        this.name = createDiscipline.name();
-    }
 
     public Discipline(int id, String name){
-
+        this.id = id;
+        this.name = name;
     }
     public int getId() {
         return id;
@@ -26,5 +23,13 @@ public class Discipline {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Discipline{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

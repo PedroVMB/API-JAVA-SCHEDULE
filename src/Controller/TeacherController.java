@@ -44,7 +44,7 @@ public class TeacherController implements HttpHandler {
                     sendResponse(exchange, "Método não suportado", 405);
             }
         } catch (SQLException e) {
-            sendResponse(exchange, "Erro interno do servidor", 500);
+            sendResponse(exchange,  e.toString(), 500);
         }
     }
 

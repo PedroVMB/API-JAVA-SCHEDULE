@@ -1,14 +1,14 @@
 import Controller.ClassroomController;
 import Controller.DisciplineController;
+import Controller.TeacherController;
 import Service.ClassroomService;
 import Service.DisciplineService;
-import com.sun.net.httpserver.HttpServer;
-import java.net.InetSocketAddress;
-import java.io.IOException;
-import Controller.TeacherController;
 import Service.TeacherService;
+import com.sun.net.httpserver.HttpServer;
 
-import com.sun.net.httpserver.*;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.util.concurrent.Executors;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -21,32 +21,31 @@ public class Main {
         ClassroomService classroomService = new ClassroomService();
         ClassroomController classroomController = new ClassroomController(classroomService);
 
-        HttpServer server = HttpServer.create(new InetSocketAddress(3000), 0);
+        try {
+            HttpServer server = HttpServer.create(new InetSocketAddress(3000), 0);
 
-        server.createContext("/api/teachers", teacherController);
-        server.createContext("/api/disciplines", disciplineController);
-        server.createContext("/api/classrooms", classroomController);
+            // Contexto padrão para cabeçalhos CORS
+            server.createContext("/", exchange -> {
+                System.out.println("Recebida requisição para o contexto padrão (/)");
+                // Restante do código de configuração do CORS...
+            });
 
+            // Contexto para /api/teachers
+            server.createContext("/api/teachers", teacherController);
 
-        server.createContext("/", exchange -> {
-            Headers headers = exchange.getResponseHeaders();
-            headers.set("Access-Control-Allow-Origin", "*");
-            headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-            headers.set("Access-Control-Allow-Headers", "Content-Type");
-            headers.set("Access-Control-Max-Age", "3600");
+            // Contexto para /api/disciplines
+            server.createContext("/api/disciplines", disciplineController);
 
+            // Contexto para /api/classrooms
+            server.createContext("/api/classrooms", classroomController);
 
-            if (exchange.getRequestMethod().equalsIgnoreCase("OPTIONS")) {
-                exchange.sendResponseHeaders(204, -1);
-                return;
-            }
+            server.setExecutor(Executors.newFixedThreadPool(10));
+            server.start();
 
-
-            exchange.getHttpContext().getHandler().handle(exchange);
-        });
-
-        server.setExecutor(null);
-        server.start();
-        System.out.println("Servidor HTTP iniciado na porta 3000");
+            System.out.println("Servidor HTTP iniciado na porta 3000");
+        } catch (IOException e) {
+            System.err.println("Erro ao iniciar o servidor: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

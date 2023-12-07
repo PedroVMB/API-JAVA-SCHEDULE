@@ -12,12 +12,12 @@ public class Classroom {
     private final int disciplineId;
 
 
-    public Classroom(CreateClassroom create) {
-        this.daysOfWeek = create.daysOfWeek();
-        this.shift = create.shift();
-        this.schedule = create.schedule();
-        this.teacherId = create.teacher().getId();
-        this.disciplineId = create.discipline().getId();
+    public Classroom(int id, Days daysOfWeek, Shift shift, String schedule, final int teacherId, final int disciplineId) {
+        this.daysOfWeek = daysOfWeek;
+        this.shift = shift;
+        this.schedule = schedule;
+        this.teacherId = teacherId;
+        this.disciplineId = disciplineId;
     }
 
     public int getId() {

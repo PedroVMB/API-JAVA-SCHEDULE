@@ -53,8 +53,9 @@ public class ClassroomDAO {
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     int generatedId = generatedKeys.getInt(1);
-                    createClassroom = new CreateClassroom(generatedId, createClassroom.daysOfWeek(), createClassroom.shift(),
-                            createClassroom.schedule(), createClassroom.teacher(), createClassroom.discipline());
+                    Classroom createdClassroom = new Classroom(generatedId, createClassroom.daysOfWeek(), createClassroom.shift(),
+                            createClassroom.schedule(), createClassroom.teacher().getId(), createClassroom.discipline().getId());
+
                 } else {
                     throw new SQLException("Falha ao criar a sala de aula, nenhum ID obtido.");
                 }
@@ -149,10 +150,9 @@ public class ClassroomDAO {
         int teacherId = resultSet.getInt("teacher_id");
         int disciplineId = resultSet.getInt("discipline_id");
 
-        // Você pode precisar obter o nome e o e-mail do professor e da disciplina aqui, dependendo dos requisitos
         Teacher teacher = new TeacherDAO().getTeacherById(ConnectionDB.getConnection(), teacherId);
         Discipline discipline = new DisciplineDAO().getDisciplineById(ConnectionDB.getConnection(), disciplineId);
 
-        return new Classroom(new CreateClassroom(id, daysOfWeek, shift, schedule, teacher, discipline));
+        return new Classroom(id, daysOfWeek, shift, schedule, teacherId, disciplineId);
     }
 }
